@@ -1,4 +1,4 @@
-import { getProductById, getProducts } from './fetch-helpers'
+import { getProductById, getProducts,searchProducts } from './fetch-helpers'
 import { renderProductDetails, renderProducts } from './dom-helpers'
 
 const errorMessage = document.querySelector('#error-message');
@@ -27,4 +27,23 @@ productsList.addEventListener('click',(event)=>{
       renderProductDetails(data);
     }
     })
+})
+const form = document.getElementById('search-form');
+
+form.addEventListener('submit', async (event) => {
+    event.preventDefault();
+    const formData = new FormData(form);
+
+    const formValues = {
+        query: formData.get('query'),
+    };
+    const {data,error}=await searchProducts(formValues.query);
+    if(error){
+        errorMessage.textContent = 'Failed to load recipe details.';
+        setTimeout(() => {
+            errorMessage.textContent = '';
+        }, 2000);
+    }
+    renderProducts(data.products);
+    form.reset();
 })

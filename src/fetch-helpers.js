@@ -33,6 +33,16 @@ export const getProductById = (id) => {
         })
 };
 
-export const searchProducts = (query) => {
-
+export const searchProducts = async (query) => {
+    try{
+        const response = await fetch(`https://dummyjson.com/products/search?q=${query}`);
+        if(!response.ok){
+            throw new Error(`Fetch failed. ${response.status} ${response.statusText}`);
+        }
+        let data = await response.json();
+        return {data: data,error: null}
+    }catch(error){
+        return{data: null, error};
+    }
 };
+searchProducts
