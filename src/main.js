@@ -44,6 +44,6 @@ form.addEventListener('submit', async (event) => {
             errorMessage.textContent = '';
         }, 2000);
     }
-    renderProducts(data.products);
+    renderProducts(data.products);///did not know how to display data now I do 
     form.reset();
 })
