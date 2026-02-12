@@ -45,4 +45,3 @@ export const searchProducts = async (query) => {
         return{data: null, error};
     }
 };
-searchProducts
